@@ -53,12 +53,14 @@ var work = {
         {
             "position": " Associate",
             "Employer": "Cognizant",
+            "location": "Pune",
             "Years": "October 2017-Present",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         },
         {
             "position": " Programmer Analyst",
             "Employer": "Cognizant",
+            "location": "Chennai",
             "Years": "September 2014-October 2017",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
@@ -93,14 +95,14 @@ var projects ={
 var education = {
     "schools": [{
         "name": "Lovely Professional University",
-        "city": "Jalandhar, Punjab",
+        "location": "Jalandhar, Punjab",
         "years": "2010-2014",
         "degree": "B.Tech",
         "major": "Computer Science"
     },
     {
         "name": "St.Jude's School",
-        "city": "Dehradun, Uttarakhand",
+        "location": "Dehradun, Uttarakhand",
         "years": "2009-2010",
         "degree": "SSC",
         "major": "PCM"
@@ -152,18 +154,6 @@ function displayWork()
 }
 displayWork();
 
-function inName(name)
-{
-    name = name.trim().split(" ");
-    console.log(name);
-
-    name[1]= name[1].toUpperCase();
-    name[0]= name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
-    name.join(" ");
-    return name;
-
-}
-$("#main").append(internationalizeButton);
 
 projects.display=function(){
     for(project in projects.projects)
@@ -181,6 +171,52 @@ projects.display=function(){
     }
 }
 projects.display();
+
+displayEducation = function ()
+{
+    for(edu in education.schools)
+    {
+        $("#education").append(HTMLschoolStart);
+
+        $(".education-entry:last").append(HTMLschoolName.replace("%data%",education.schools[edu].name));
+        $(".education-entry:last").append(HTMLschoolDegree.replace("%data%",education.schools[edu].degree));
+        $(".education-entry:last").append(HTMLschoolDates.replace("%data%",education.schools[edu].years));
+        $(".education-entry:last").append(HTMLschoolLocation.replace("%data%",education.schools[edu].location));
+        $(".education-entry:last").append(HTMLschoolMajor.replace("%data%",education.schools[edu].major));
+        
+    }
+}
+
+displayEducation();
+
+education.displayOnlineCourse = function (){
+    for(oc in education.onlinecourses)
+    {
+        $(".education-entry:last").append(HTMLonlineClasses);
+
+        $(".education-entry:last").append(HTMLonlineSchool.replace("%data%",education.onlinecourses[oc].school));
+        $(".education-entry:last").append(HTMLonlineTitle.replace("%data%",education.onlinecourses[oc].title));
+        $(".education-entry:last").append(HTMLonlineDates.replace("%data%",education.onlinecourses[oc].dates));
+        $(".education-entry:last").append(HTMLonlineURL.replace("%data%",education.onlinecourses[oc].url));
+    }
+
+}
+
+education.displayOnlineCourse();
+
+function inName(name)
+{
+    name = name.trim().split(" ");
+    console.log(name);
+
+    name[1]= name[1].toUpperCase();
+    name[0]= name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
+    name.join(" ");
+    return name;
+
+}
+$("#main").append(internationalizeButton);
+$("#mapDiv").append(googleMap);
 
 
 
